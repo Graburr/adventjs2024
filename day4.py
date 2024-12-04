@@ -1,6 +1,6 @@
 # 5 stars
 def createXmasTree(height, ornament):
-  num_ornamenta = 1
+  num_ornaments = 1
   tree = ""
 
   for i in range(height - 1, -1, -1):
