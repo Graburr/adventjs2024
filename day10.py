@@ -28,11 +28,12 @@ def compile(instructions):
 
 if __name__ == "__main__":
   instructions = [
-    'MOV -1 C', 
-    "INC C",
-    "JMP C 1",
-    "MOV C A",
-    "INC A"
+    "MOV 3 C",
+    "DEC C",
+    "DEC C",
+    "DEC C",
+    "JMP C 3",
+    "MOV C A"
   ]
 
   print(compile(instructions))
