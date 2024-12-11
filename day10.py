@@ -5,7 +5,7 @@ def compile(instructions):
   i = 0
   instruction : list[str] = None
 
-  operators = operators = {
+  operators = {
     "MOV": lambda variable: variables.update({instruction[2]: 
                                               int(variable) if re.search("-?[0-9]+", variable)
                                               else variables[variable]}),
