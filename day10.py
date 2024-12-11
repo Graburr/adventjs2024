@@ -2,30 +2,36 @@ import re
 
 def compile(instructions):
   variables = {}
-  operators = {"INC" : (lambda value: variables[variable] = value),
-              "DEC" : -1}
   i = 0
+  instruction : list[str] = None
+
+  operators = operators = {
+    "MOV": lambda variable: variables.update({instruction[2]: 
+                                              int(variable) if re.search("-?[0-9]+", variable)
+                                              else variables[variable]}),
+    "JMP": lambda variable: int(instruction[2]) if variable == 0 else i + 1, 
+    "INC": lambda variable: variables.update({variable: variables.get(variable, 0) + 1}),
+    "DEC": lambda variable: variables.update({variable: variables.get(variable, 0) - 1}),
+  }
+  
 
   while i < len(instructions):
     instruction = instructions[i].split()
-
-    if instruction[0] == "MOV":
-      variables[instruction[-1]] = (int(instruction[1]) if re.search("-?[0-9]+", instruction[1])
-                                    else variables[instruction[1]]) 
-    elif instruction[0] == "JMP":
-      i = int(instruction[2]) if variables[instruction[1]] == 0 else i + 1
-      continue
-    else:
-      variables[instruction[1]] = (variables[instruction[1]] + operators[instruction[0]] 
-                                   if instruction[1] in variables else 0)
     
-    i += 1
+    if instruction[0] != "JMP":
+      operators[instruction[0]](instruction[1])
+      i += 1
+    else:
+      i = operators[instruction[0]](instruction[1])
 
   return variables.get("A", None)
 
 if __name__ == "__main__":
   instructions = [
-    'MOV 0 A', 
+    'MOV -1 C', 
+    "INC C",
+    "JMP C 1",
+    "MOV C A",
     "INC A"
   ]
 
