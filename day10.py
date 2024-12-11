@@ -9,7 +9,7 @@ def compile(instructions):
     "MOV": lambda variable: variables.update({instruction[2]: 
                                               int(variable) if re.search("-?[0-9]+", variable)
                                               else variables[variable]}),
-    "JMP": lambda variable: int(instruction[2]) if variable == 0 else i + 1, 
+    "JMP": lambda variable: int(instruction[2]) if variables[variable] == 0 else i + 1, 
     "INC": lambda variable: variables.update({variable: variables.get(variable, 0) + 1}),
     "DEC": lambda variable: variables.update({variable: variables.get(variable, 0) - 1}),
   }
