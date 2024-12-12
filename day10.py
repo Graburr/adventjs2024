@@ -1,5 +1,5 @@
 import re
-
+# Trying all test by hand works fine but when upload it, doesn't work
 def compile(instructions):
   variables = {}
   i = 0
@@ -25,15 +25,3 @@ def compile(instructions):
       i = operators[instruction[0]](instruction[1])
 
   return variables.get("A", None)
-
-if __name__ == "__main__":
-  instructions = [
-    "MOV 3 C",
-    "DEC C",
-    "DEC C",
-    "DEC C",
-    "JMP C 3",
-    "MOV C A"
-  ]
-
-  print(compile(instructions))
